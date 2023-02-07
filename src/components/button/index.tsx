@@ -1,13 +1,17 @@
 import React from 'react';
 import style from './Button.module.scss'
 
-type ButtonProps = {
-    text:string
+interface ButtonProps {
+    type?:"button" | "submit" | "reset" | undefined,
+    onClick:()=>void
+    children?:React.ReactNode
 }
 
-function Button({text}:ButtonProps){
+function Button({type,onClick,children}:ButtonProps){
     return <>
-        <button className={style.submitButton}>{text}</button>
+        <button onClick={onClick} type={type} className={style.submitButton}>
+            {children}
+        </button>
     </>
 }
 

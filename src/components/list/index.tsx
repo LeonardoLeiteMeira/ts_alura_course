@@ -1,30 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ITask from '../../types/ITaskInterface'
 import Item from './item'
 import style from './List.module.scss'
 
-function List(){
-    const tasks = [
-        {
-            "task":"Reatc",
-            "time": '02:00:00'
-        },
-        {
-            "task":"JavaScript",
-            "time": '01:00:00'
-        },
-        {
-            "task":"TypeScript",
-            "time":'03:00:00'
-        }
-    ]
+interface ListProps {
+    taskList:Array<ITask>
+    selectTask:(task:ITask)=>void
+}
 
+function List({taskList, selectTask}:ListProps){
     return <aside className={style.taskList}>
         <h2>Daily Studies</h2>
         <ul>
-            {tasks.map((item, index)=>(
+            {taskList.map((item, index)=>(
                 <Item
-                    key={item.task+item.time}
-                    {...item}
+                    key={item.id}
+                    selectTask={selectTask}
+                    task={item}
                 />
             ))}
         </ul>
